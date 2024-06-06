@@ -1,3 +1,46 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {}
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["import-helpers", "react-hooks"],
+  "rules": {
+    "spaced-comment": "error",
+    "import-helpers/order-imports": [
+      "error",
+      {
+        "newlinesBetween": "always", // new line between groups
+        "groups": [
+          "/^react/",
+          "/^next/",
+          "/^@phosphor/",
+          "module",
+          "/^@/features/",
+          "/^@/layouts/",
+          "/^@/ui/",
+          "/^@/data/",
+          ["parent", "sibling", "index"]
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@/features/*/*"]
+      }
+    ]
+  }
 }
