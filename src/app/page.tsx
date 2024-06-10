@@ -1,3 +1,3 @@
 export default function Home(): JSX.Element {
-  return <main>Hello World</main>;
+  return <main className="p-4">Hello World</main>;
 }
