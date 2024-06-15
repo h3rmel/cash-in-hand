@@ -68,7 +68,7 @@
 
 @layer base {
   * {
-    @apply box-border border-border scroll-smooth;
+    @apply box-border scroll-smooth border-border;
   }
 
   body {

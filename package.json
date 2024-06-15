@@ -36,7 +36,7 @@
     "start": "next start",
     "n:lint": "next lint",
     "p:check": "prettier --check .",
-    "p:format": "prettier --write .",
+    "p:write": "prettier --write .",
     "e:check": "eslint . --ext .ts,.tsx",
     "e:lint": "eslint . --ext .ts,.tsx --fix",
     "prepare": "husky"
@@ -81,6 +81,7 @@
     "lint-staged": "^15.2.5",
     "postcss": "^8",
     "prettier": "^3.3.1",
+    "prettier-plugin-tailwindcss": "^0.6.4",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
