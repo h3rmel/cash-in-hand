@@ -1,3 +1,5 @@
+import { Document } from 'mongoose';
+
 interface IUser {
   _id: string;
   name: string;
@@ -6,3 +8,5 @@ interface IUser {
   created_at: Date;
   _deleted: boolean;
 }
+
+interface IUserDocument extends IUser, Document {}

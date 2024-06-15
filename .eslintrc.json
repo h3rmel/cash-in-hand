@@ -25,12 +25,8 @@
         "groups": [
           "/^react/",
           "/^next/",
-          "/^@phosphor/",
           "module",
-          "/^@/features/",
-          "/^@/layouts/",
-          "/^@/ui/",
-          "/^@/data/",
+          "/^@/",
           ["parent", "sibling", "index"]
         ],
         "alphabetize": { "order": "asc", "ignoreCase": true }

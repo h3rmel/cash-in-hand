@@ -1,7 +1,18 @@
 import { randomUUID } from 'crypto';
-import { Schema, model, models } from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 
-const UserSchema = new Schema<IUser>({
+import { IUserDocument } from '@/types/user';
+
+export interface IUser extends Document {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  created_at: Date;
+  _deleted: boolean;
+}
+
+const UserSchema = new Schema({
   _id: {
     type: String,
     default: () => randomUUID(),
@@ -28,6 +39,6 @@ const UserSchema = new Schema<IUser>({
   },
 });
 
-const UserModel = models.User || model('User', UserSchema);
+const UserModel = model<IUserDocument>('User', UserSchema);
 
 export default UserModel;

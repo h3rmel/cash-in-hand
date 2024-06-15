@@ -1,7 +1,9 @@
 import { randomUUID } from 'crypto';
-import { Schema, model, models } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const TransactionSchema = new Schema<ITransaction>({
+import { ITransactionDocument } from '@/types/transaction';
+
+const TransactionSchema = new Schema({
   _id: {
     type: String,
     default: () => randomUUID(),
@@ -29,6 +31,6 @@ const TransactionSchema = new Schema<ITransaction>({
   },
 });
 
-const TransactionModel = models.Transaction || model('Transaction', TransactionSchema);
+const TransactionModel = model<ITransactionDocument>('Transaction', TransactionSchema);
 
 export default TransactionModel;

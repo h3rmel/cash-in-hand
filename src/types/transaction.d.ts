@@ -1,3 +1,5 @@
+import { Document } from 'mongoose';
+
 type TransactionType = 'income' | 'expense';
 
 interface ITransaction {
@@ -8,3 +10,5 @@ interface ITransaction {
   value: number;
   created_at: Date;
 }
+
+interface ITransactionDocument extends ITransaction, Document {}
