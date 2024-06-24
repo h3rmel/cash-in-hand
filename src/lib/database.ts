@@ -1,40 +1,29 @@
-// // import { connect } from 'mongoose';
-
 import mongoose from 'mongoose';
 
-import { BadRequestError } from '@/lib/errors';
+import { InternalServerError } from './errors';
 
-/**
- * @see {@url https://dev.to/thatanjan/2-ways-to-set-up-nextjs-with-mongodb-and-mongoose-4afo}
- */
+export async function connectToDatabase(): Promise<typeof mongoose> {
+  const MONGODB_URI: string = process.env.MONGODB_URI as string;
 
-// // import { InternalServerError } from '@/lib/errors';
+  if (!MONGODB_URI) throw new InternalServerError('MONGODB_URI is not defined', 'MONGODB_URI is not defined');
 
-// // /**
-// //  * Connects to the database using the provided MongoDB URI.
-// //  *
-// //  * @returns A promise that resolves to the Mongoose module.
-// //  * @throws {InternalServerError} If an error occurs while connecting to the database.
-// //  */
-// // export async function connectToDatabase(): Promise<typeof import('mongoose')> {
-// //   try {
-// //     return await connect(process.env.MONGODB_URI as string, { autoIndex: false });
-// //   } catch (error) {
-// //     console.error(error);
+  try {
+    const connection: Promise<typeof mongoose> = mongoose.connect(MONGODB_URI, { autoIndex: false });
 
-// //     throw new InternalServerError(
-// //       'An error occurred while connecting to the database.',
-// //       'An error occurred while connecting to the database. Please try again.',
-// //     );
-// //   }
-// // }
+    mongoose.connection.on('connected', () => {
+      console.info('Connected to Database!');
+    });
+    mongoose.connection.on('disconnected', () => {
+      console.info('Disconnected from Database!');
+    });
 
-const MONGODB_URI: string = process.env.MONGODB_URI as string;
+    return connection;
+  } catch (error) {
+    console.error(error);
 
-if (!MONGODB_URI) throw new BadRequestError('MONGODB_URI is not defined', 'MONGODB_URI is not defined');
-
-let cached = global.mongoose;
-
-if (!cached) cached = global.mongoose = { connection: null, promise: null };
-
-async function connectToDatabase() {}
+    throw new InternalServerError(
+      'An error occurred while connecting to the database.',
+      'An error occurred while connecting to the database. Please try again.',
+    );
+  }
+}
