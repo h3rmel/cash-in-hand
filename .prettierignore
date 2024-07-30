@@ -1,0 +1,21 @@
+# Folders
+node_modules/
+build/
+dist/
+docs/
+.husky/
+
+# Files
+*.yaml
+
+# NPM Packages
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Eslint
+.eslintignore
+.eslintrc.json
+
+# Lint-staged
+.lintstagedrc.json
