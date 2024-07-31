@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 
 import type { Metadata } from 'next';
 
+import { ThemeProvider } from '@/components/theme/theme-provider';
 import { cn } from '@/lib/utils';
 import { sora } from '@/styles/fonts';
 
@@ -22,8 +23,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProsp) {
   return (
-    <html lang="en">
-      <body className={cn('min-h-screen bg-background font-sora antialiased', sora.variable)}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn('min-h-screen bg-background font-sora antialiased', sora.variable)}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

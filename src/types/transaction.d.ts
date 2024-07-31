@@ -1,5 +1,3 @@
-import { ICategory } from './category';
-
 export type TransactionType = 'income' | 'expense';
 
 /**
@@ -13,7 +11,7 @@ export type TransactionType = 'income' | 'expense';
  * @param title - Title of the transaction. (e.g. Salary, Rent, etc.)
  * @param description - Short description of this transaction. (To who, where, etc.)
  * @param type - Type of the transaction. Could be an `income` or an `expense`.
- * @param category - Category of the transaction. (e.g. Salary, Health, Service, etc.)
+ * @param categoryId - ID of the category of the transaction. (e.g. Salary, Health, Service, etc.)
  * @param date - Date when this transaction was made.
  * @param createdAt - Date when this transaction was created.
  */
@@ -22,7 +20,7 @@ export interface ITransaction {
   title: string;
   description: string;
   type: TransactionType;
-  category: ICategory;
+  categoryId: string;
   amount: number;
   date: Date;
   createdAt: Date;
@@ -40,6 +38,4 @@ export interface ITransaction {
  * @param categoryId - ID of the category of the transaction. (e.g. Salary, Health, Service, etc.)
  * @param date - Date when this transaction was made.
  */
-export interface ITransactionFormData extends Omit<ITransaction, 'id' | 'createdAt', 'category'> {
-  categoryId: string;
-}
+export interface ITransactionFormData extends Omit<ITransaction, 'id' | 'createdAt'> {}

@@ -1,11 +1,10 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "airbnb",
-    "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "prettier"
   ],
   "settings": {
     "import/resolver": {
@@ -25,21 +24,12 @@
         "groups": [
           "/^react/",
           "/^next/",
-          "module",
           "/^@/",
+          "module",
+          "/^@//",
           ["parent", "sibling", "index"]
         ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
-      }
-    ],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
       }
     ],
     "import/prefer-default-export": "off",
@@ -47,9 +37,11 @@
     "global-require": "off",
     "spaced-comment": "warn",
     "no-console": "warn",
+    "camelcase": "off",
     "react/require-default-props": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts",".tsx"] }],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

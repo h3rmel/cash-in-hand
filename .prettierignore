@@ -4,6 +4,7 @@ build/
 dist/
 docs/
 .husky/
+.vscode/
 
 # Files
 *.yaml

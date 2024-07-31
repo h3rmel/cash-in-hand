@@ -8,6 +8,6 @@
 
 @layer base {
   * {
-    @apply font-sora;
+    @apply box-border scroll-smooth font-sora;
   }
 }

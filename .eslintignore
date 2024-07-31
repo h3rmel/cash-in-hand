@@ -4,8 +4,9 @@ build/
 dist/
 docs/
 .husky/
+.vscode/
 # shadcn/ui components
-src/ui/components/ui
+src/components/ui/
 
 # Files
 *.yaml
