@@ -1,16 +1,9 @@
 'use client';
 
+// #region Imports
+
 import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -23,12 +16,35 @@ import {
   VisibilityState,
 } from '@tanstack/react-table';
 
+import { useLanguage } from '@/components/language/language-provider';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
+import { dataTableLanguages } from '../_i18n/data-table.lng';
+
+// #endregion
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+/**
+ * Renders a data table component.
+ *
+ * @component
+ * @param columns - The columns of the data table.
+ * @param data - The data of the data table.
+ * @returns {JSX.Element} The data table component.
+ */
+export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>): JSX.Element {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -52,11 +68,13 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     },
   });
 
+  const { translate } = useLanguage();
+
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by title..."
+          placeholder={translate('filter_by', dataTableLanguages)}
           value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
           onChange={(event) => table.getColumn('title')?.setFilterValue(event.target.value)}
           className="max-w-sm"
@@ -64,7 +82,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns
+              {translate('columns', dataTableLanguages)}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -79,7 +97,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) => column.toggleVisibility(!!value)}
                   >
-                    {column.id}
+                    {translate(column.id.toLowerCase(), dataTableLanguages)}
                   </DropdownMenuCheckboxItem>
                 );
               })}

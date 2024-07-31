@@ -4,10 +4,10 @@ import { faker, fakerPT_BR } from '@faker-js/faker';
 function generateMockTransaction(): ITransaction {
   return {
     id: fakerPT_BR.string.uuid(),
-    title: fakerPT_BR.commerce.product(),
+    name: fakerPT_BR.commerce.product(),
     description: fakerPT_BR.lorem.sentence(),
     type: fakerPT_BR.datatype.boolean() ? 'income' : 'expense',
-    amount: Number(fakerPT_BR.finance.amount()),
+    value: Number(fakerPT_BR.finance.amount()),
     categoryId: String(Math.floor(Math.random() * 6) + 1),
     createdAt: fakerPT_BR.date.anytime(),
     date: faker.date.anytime(),

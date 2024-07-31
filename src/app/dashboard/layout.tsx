@@ -6,7 +6,11 @@ interface DashboardLayoutProps {
   children: ReactNode;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+/**
+ * @layout
+ * @returns {JSX.Element} The dashboard layout.
+ */
+export default function DashboardLayout({ children }: DashboardLayoutProps): JSX.Element {
   return (
     <div className="flex">
       <Sidebar />

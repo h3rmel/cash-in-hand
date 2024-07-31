@@ -8,7 +8,7 @@ export type TransactionType = 'income' | 'expense';
  * A transaction is a banking/financial operation that has occurred.
  *
  * @param id - Unique identifier of the transaction. (Auto-generated)
- * @param title - Title of the transaction. (e.g. Salary, Rent, etc.)
+ * @param name - Name of the transaction. (e.g. Salary, Rent, etc.)
  * @param description - Short description of this transaction. (To who, where, etc.)
  * @param type - Type of the transaction. Could be an `income` or an `expense`.
  * @param categoryId - ID of the category of the transaction. (e.g. Salary, Health, Service, etc.)
@@ -17,11 +17,11 @@ export type TransactionType = 'income' | 'expense';
  */
 export interface ITransaction {
   id: string;
-  title: string;
+  name: string;
   description: string;
   type: TransactionType;
   categoryId: string;
-  amount: number;
+  value: number;
   date: Date;
   createdAt: Date;
 }
@@ -32,7 +32,7 @@ export interface ITransaction {
  * Serves as a model for the transaction form data object.
  * Used to create and manage transactions with a form.
  *
- * @param title - Title of the transaction. (e.g. Salary, Rent, etc.)
+ * @param name - Name of the transaction. (e.g. Salary, Rent, etc.)
  * @param description - Short description of this transaction. (To who, where, etc.)
  * @param type - Type of the transaction. Could be an `income` or an `expense`.
  * @param categoryId - ID of the category of the transaction. (e.g. Salary, Health, Service, etc.)
