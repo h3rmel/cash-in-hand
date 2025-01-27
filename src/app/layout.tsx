@@ -23,7 +23,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ClerkProvider afterSignOutUrl="/">
       <html lang="en">
-        <body className={cn('w-full min-h-screen antialiased', geistMono.variable, geistSans.variable)}>
+        <body className={cn('w-full min-h-screen font-sans antialiased', geistMono.variable, geistSans.variable)}>
           {children}
         </body>
       </html>
