@@ -10,6 +10,8 @@ import { cn } from '@/lib/utils';
 
 import { geistMono, geistSans } from '@/assets/fonts';
 
+import { QueryProvider } from '@/providers/query-provider';
+
 export const metadata: Metadata = {
   title: {
     default: 'Cash In Hand',
@@ -27,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <ClerkProvider afterSignOutUrl="/">
       <html lang="en">
         <body className={cn('w-full min-h-screen font-sans antialiased', geistMono.variable, geistSans.variable)}>
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </body>
       </html>
     </ClerkProvider>
