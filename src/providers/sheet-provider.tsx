@@ -1,6 +1,6 @@
 'use client';
 
-import { NewAccountSheet } from '@/components/accounts/new-account-sheet';
+import { NewAccountSheet } from '@/modules/accounts/components/new-account-sheet';
 
 import useMountedState from '@/hooks/use-mounted-state';
 

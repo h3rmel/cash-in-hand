@@ -19,7 +19,7 @@ const config = {
     '',
     '<THIRD_PARTY_MODULES>',
     '',
-    '^@/contexts(/.*)$',
+    '^@/modules(/.*)$',
     '',
     '^@/components(/.*)$',
     '',

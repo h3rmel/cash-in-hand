@@ -3,13 +3,13 @@ import { Trash } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
 import { cn } from '@/lib/utils';
 
 import { insertAccountSchema } from '@/database/schema';
-
-import { Button } from '../ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form';
-import { Input } from '../ui/input';
 
 const formSchema = insertAccountSchema.pick({
   name: true,
@@ -25,7 +25,13 @@ type AccountFormProps = {
   disabled?: boolean;
 };
 
-export function AccountForm({ onSubmit, defaultValues, disabled, id, onDelete }: AccountFormProps) {
+export function AccountForm({
+  onSubmit,
+  defaultValues,
+  disabled,
+  id,
+  onDelete,
+}: AccountFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues,
@@ -49,7 +55,11 @@ export function AccountForm({ onSubmit, defaultValues, disabled, id, onDelete }:
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input disabled={disabled} placeholder="e.g. Cash, Back, Credit Card, etc." {...field} />
+                <Input
+                  disabled={disabled}
+                  placeholder="e.g. Cash, Back, Credit Card, etc."
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -58,7 +68,13 @@ export function AccountForm({ onSubmit, defaultValues, disabled, id, onDelete }:
           {id ? 'Save Changes' : 'Create Account'}
         </Button>
         {!!id && (
-          <Button className="w-full" variant="outline" type="button" disabled={disabled} onClick={handleDelete}>
+          <Button
+            className="w-full"
+            variant="outline"
+            type="button"
+            disabled={disabled}
+            onClick={handleDelete}
+          >
             <Trash className="size-4" />
             Delete Account
           </Button>

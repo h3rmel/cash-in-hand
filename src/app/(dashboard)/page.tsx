@@ -2,14 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 
-import { useNewAccount } from '@/hooks/accounts/use-new-account';
+import { useSheets } from '@/hooks/use-sheets';
 
 export default function Home() {
-  const { onOpen } = useNewAccount();
+  const { onOpen } = useSheets();
 
   return (
     <div>
-      <Button onClick={onOpen}>Add Account</Button>
+      <Button onClick={() => onOpen('newAccount')}>Add Account</Button>
     </div>
   );
 }
