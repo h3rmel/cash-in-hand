@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trash } from 'lucide-react';
+import { Loader2, Trash } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -65,9 +65,13 @@ export function AccountForm({
           )}
         />
         <Button className={cn('w-full')} type="submit" disabled={disabled}>
-          {id ? 'Save Changes' : 'Create Account'}
+          {!disabled ? (
+            <>{id ? 'Save Changes' : 'Create Account'}</>
+          ) : (
+            <Loader2 className="animate-spin" />
+          )}
         </Button>
-        {!!id && (
+        {Boolean(id) && (
           <Button
             className="w-full"
             variant="outline"

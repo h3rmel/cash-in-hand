@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import '@/assets/globals.css';
 
 import { ClerkProvider } from '@clerk/nextjs';
+
 import { Toaster } from '@/components/ui/sonner';
 
 import { cn } from '@/lib/utils';
@@ -30,7 +31,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ClerkProvider afterSignOutUrl="/">
       <html lang="en">
-        <body className={cn('w-full min-h-screen font-sans antialiased', geistMono.variable, geistSans.variable)}>
+        <body
+          className={cn(
+            'w-full min-h-screen font-sans antialiased',
+            geistMono.variable,
+            geistSans.variable,
+          )}
+        >
           <QueryProvider>
             <SheetProvider />
             <Toaster />

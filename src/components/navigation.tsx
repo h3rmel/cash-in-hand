@@ -12,7 +12,13 @@ import useMedia from '@/hooks/use-media';
 
 import { NavigationButton } from './navigation-button';
 import { Button } from './ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from './ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from './ui/sheet';
 
 type NavigationRoutes = {
   href: string;
@@ -89,7 +95,11 @@ export function Navigation() {
   return (
     <nav className={cn('hidden lg:flex', 'items-center gap-2', 'overflow-x-auto')}>
       {routes.map((route) => (
-        <NavigationButton key={route.label} {...route} isActive={pathname === route.href} />
+        <NavigationButton
+          key={route.label}
+          {...route}
+          isActive={pathname === route.href}
+        />
       ))}
     </nav>
   );

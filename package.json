@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.19.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@types/node": "^20.17.17",
     "@types/react": "^19.0.8",
@@ -50,12 +51,16 @@
     "drizzle-orm": "^0.39.2",
     "eslint": "^9.19.0",
     "eslint-config-next": "15.1.6",
+    "eslint-plugin-check-file": "^3.0.0",
+    "eslint-plugin-jsdoc": "^50.6.3",
+    "eslint-plugin-no-secrets": "^2.2.1",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
   },
   "packageManager": "pnpm@9.15.3+sha512.1f79bc245a66eb0b07c5d4d83131240774642caaa86ef7d0434ab47c0d16f66b04e21e0c086eb61e62c77efc4d7f7ec071afad3796af64892fae66509173893a"
 }

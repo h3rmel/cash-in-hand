@@ -12,7 +12,9 @@ export function WelcomeMessage() {
       <h2 className={cn('text-2xl lg:text-4xl text-white font-medium')}>
         Welcome Back{isLoaded && ', '} {user?.firstName} 👋
       </h2>
-      <p className={cn('text-sm lg:text-base text-white/60 tracking-wide')}>This is your Financal Overview Report.</p>
+      <p className={cn('text-sm lg:text-base text-white/60 tracking-wide')}>
+        This is your Financal Overview Report.
+      </p>
     </hgroup>
   );
 }
