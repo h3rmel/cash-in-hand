@@ -5,12 +5,14 @@ import type { Metadata } from 'next';
 import '@/assets/globals.css';
 
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from '@/components/ui/sonner';
 
 import { cn } from '@/lib/utils';
 
 import { geistMono, geistSans } from '@/assets/fonts';
 
 import { QueryProvider } from '@/providers/query-provider';
+import { SheetProvider } from '@/providers/sheet-provider';
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +31,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <ClerkProvider afterSignOutUrl="/">
       <html lang="en">
         <body className={cn('w-full min-h-screen font-sans antialiased', geistMono.variable, geistSans.variable)}>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <SheetProvider />
+            <Toaster />
+            {children}
+          </QueryProvider>
         </body>
       </html>
     </ClerkProvider>

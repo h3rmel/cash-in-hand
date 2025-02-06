@@ -7,6 +7,6 @@
     "tailwind.config.ts": "postcss*",
     "README.md": "*.md",
     "next.config.ts": "eslint*, .prettier*",
-    ".env.local": ".env*"
+    ".env": ".env*"
   }
 }
