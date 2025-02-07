@@ -3,7 +3,7 @@
 import { Row } from '@tanstack/react-table';
 import { Plus } from 'lucide-react';
 
-import { columns } from '@/modules/accounts/components/data-table/columns';
+import { columns } from '@/modules/accounts/components';
 import { useBulkDeleteAccount, useGetAccounts } from '@/modules/accounts/services';
 
 import { DataTable } from '@/components/data-table';
@@ -16,11 +16,11 @@ import { useSheets } from '@/hooks/use-sheets';
 
 export default function AccountsPage() {
   const { onOpen } = useSheets();
+
   const accountsQuery = useGetAccounts();
   const deleteAccounts = useBulkDeleteAccount();
 
   const accounts = accountsQuery.data ?? [];
-
   const isDisabled = accountsQuery.isLoading || deleteAccounts.isPending;
 
   function handleOnDelete(
@@ -34,7 +34,6 @@ export default function AccountsPage() {
     deleteAccounts.mutate({ ids });
   }
 
-  // if (accountsQuery.isLoading) {
   if (accountsQuery.isLoading) {
     return (
       <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>

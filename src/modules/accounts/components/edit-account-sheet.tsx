@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { Loader2 } from 'lucide-react';
 import { z } from 'zod';
 
 import { AccountForm } from '@/modules/accounts/components';
-import { useEditAccount, useGetAccount } from '@/modules/accounts/services';
+import {
+  useBulkDeleteAccount,
+  useEditAccount,
+  useGetAccount,
+} from '@/modules/accounts/services';
 
 import {
   Sheet,
@@ -26,8 +28,9 @@ type FormValues = z.input<typeof formSchema>;
 export function EditAccountSheet() {
   const { isOpen, onOpen, onClose, getId } = useSheets();
 
-  const accountQuery = useGetAccount(getId('editAccount'));
+  const accountQuery = useGetAccount(getId('editAccount') ?? '');
   const mutation = useEditAccount(getId('editAccount'));
+  const deleteMutation = useBulkDeleteAccount();
 
   function onSubmit(values: FormValues) {
     mutation.mutate(values, {
@@ -35,6 +38,17 @@ export function EditAccountSheet() {
         onClose('editAccount');
       },
     });
+  }
+
+  function onDelete() {
+    deleteMutation.mutate(
+      { ids: [getId('editAccount') ?? ''] },
+      {
+        onSuccess: () => {
+          onClose('editAccount');
+        },
+      },
+    );
   }
 
   const defaultValues = accountQuery.data
@@ -52,6 +66,7 @@ export function EditAccountSheet() {
           <AccountForm
             id={getId('editAccount')}
             onSubmit={onSubmit}
+            onDelete={onDelete}
             disabled={mutation.isPending}
             defaultValues={defaultValues}
           />

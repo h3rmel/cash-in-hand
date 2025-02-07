@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type SheetKeys = 'newAccount' | 'editAccount' | 'newTransaction';
+type SheetKeys = 'newAccount' | 'editAccount' | 'newCategory' | 'editCategory';
 type SheetState = Record<string, { isOpen: boolean; id?: string }>;
 type SheetsState = {
   sheets: SheetState;
@@ -14,7 +14,8 @@ export const useSheets = create<SheetsState>((set, get) => ({
   sheets: {
     newAccount: { isOpen: false },
     editAccount: { isOpen: false, id: undefined },
-    newTransaction: { isOpen: false },
+    newCategory: { isOpen: false },
+    editCategory: { isOpen: false, id: undefined },
   },
   onOpen: (key: SheetKeys, id?: string) =>
     set((state) => ({

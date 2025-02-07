@@ -16,8 +16,6 @@ import {
 } from '@tanstack/react-table';
 import { Trash } from 'lucide-react';
 
-import { ResponseType } from '@/modules/accounts/components/data-table/columns';
-
 import { Button } from '@/components/ui/button';
 import {
   Table,
@@ -35,7 +33,7 @@ import { Input } from './ui/input';
 type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  filterKey: Exclude<keyof ResponseType, 'id'>;
+  filterKey: string; // TODO: Make this type-safe somehow
   onDelete: (rows: Row<TData>[]) => void;
   disable: boolean;
 };

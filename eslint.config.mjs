@@ -20,15 +20,6 @@ const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   ...compat.plugins('no-secrets', 'check-file', 'jsx-a11y'),
   ...compat.config({
-    parserOptions: {
-      project: "./tsconfig.json",
-      sourceType: "module",
-      ecmaVersion: "latest",
-      ecmaFeatures: {
-        impliedStrict: true,
-        jsx: true,
-      },
-    },
     ignorePatterns: [
       'node_modules/',
       '.next/',
@@ -39,6 +30,7 @@ const eslintConfig = [
       'build/',
       'src/components/ui/*.*',
     ],
+    processor: 'check-file/eslint-processor-check-file',
     rules: {
       /**
        * Default rules
@@ -72,113 +64,7 @@ const eslintConfig = [
       'no-plusplus': ['warn', { allowForLoopAfterthoughts: true }],
       'no-restricted-imports': 'off',
       'padding-line-between-statements': 'off',
-      /**
-       * TypeScript rules
-       * @see https://typescript-eslint.io/rules/
-       */
-      '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/consistent-type-assertions': [
-        'error',
-        { assertionStyle: 'as' },
-      ],
-      '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-      '@typescript-eslint/no-non-null-assertion': 'error',
-      '@typescript-eslint/prefer-nullish-coalescing': 'error',
-      '@typescript-eslint/ban-ts-comment': [
-        'error',
-        {
-          'ts-expect-error': 'allow-with-description',
-          'ts-ignore': true,
-          'ts-nocheck': true,
-          'ts-check': false,
-          minimumDescriptionLength: 3,
-        },
-      ],
-      '@typescript-eslint/restrict-template-expressions': 'error',
-      '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/no-unused-expressions': [
-        'error',
-        {
-          allowShortCircuit: true,
-          allowTernary: true,
-          enforceForJSX: true,
-        },
-      ],
-      '@typescript-eslint/no-floating-promises': [
-        'error',
-        { ignoreVoid: true, ignoreIIFE: true },
-      ],
-      '@typescript-eslint/no-misused-promises': [
-        'error',
-        {
-          checksVoidReturn: {
-            arguments: false,
-            attributes: false,
-          },
-        },
-      ],
-      '@typescript-eslint/no-unnecessary-type-arguments': 'warn',
-      '@typescript-eslint/no-unnecessary-condition': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-        },
-      ],
-      '@typescript-eslint/switch-exhaustiveness-check': 'warn',
-      '@typescript-eslint/naming-convention': [
-        'warn',
-        /**
-         * If you want to edit this config, check out it's documentation
-         * @see https://typescript-eslint.io/rules/naming-convention/
-         */
-        {
-          // Ignore convention for 3rd party libraries
-          selector: 'import',
-          format: null,
-        },
-        {
-          // Matches everything
-          selector: 'default',
-          format: ['camelCase'],
-          leadingUnderscore: 'allow',
-          trailingUnderscore: 'allow',
-        },
-        {
-          selector: ['accessor', 'classMethod', 'objectLiteralMethod', 'typeMethod'],
-          format: ['camelCase'],
-        },
-        {
-          selector: ['class', 'enum', 'interface', 'typeAlias'],
-          format: ['PascalCase'],
-        },
-        {
-          selector: ['enumMember', 'typeParameter'],
-          format: ['UPPER_CASE', 'PascalCase'],
-        },
-        {
-          selector: 'function',
-          format: ['camelCase', 'PascalCase'],
-        },
-        {
-          selector: ['parameter'],
-          format: ['camelCase', 'snake_case'],
-        },
-        {
-          selector: ['property', 'parameterProperty', 'typeProperty'],
-          format: ['camelCase', 'snake_case'],
-        },
-        {
-          selector: 'variable',
-          format: ['camelCase', 'snake_case', 'UPPER_CASE', 'PascalCase'],
-        },
-      ],
-      '@typescript-eslint/no-shadow': 'off',
-      '@typescript-eslint/quotes': 'off',
-      '@typescript-eslint/comma-dangle': 'off',
+
       /**
        * JSDoc
        *

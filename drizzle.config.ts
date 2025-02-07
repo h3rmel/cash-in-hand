@@ -1,3 +1,5 @@
+/* eslint-disable check-file/filename-naming-convention */
+
 import { config } from 'dotenv';
 import { defineConfig } from 'drizzle-kit';
 

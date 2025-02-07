@@ -17,7 +17,6 @@ app.onError((err, c) => {
   return c.json({ error: 'Internal Error.' }, 500);
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const routes = app.route('/accounts', accounts).route('/categories', categories);
 
 export const GET = handle(app);

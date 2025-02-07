@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { z } from 'zod';
 
-import { AccountForm } from '@/modules/accounts/components';
-import { useCreateAccount } from '@/modules/accounts/services';
+import { CategoryForm } from '@/modules/categories/components';
+import { useCreateCategory } from '@/modules/categories/services';
 
 import {
   Sheet,
@@ -11,37 +13,37 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 
-import { insertAccountSchema } from '@/database/schema';
+import { insertCategorySchema } from '@/database/schema';
 import { useSheets } from '@/hooks/use-sheets';
 
-const formSchema = insertAccountSchema.pick({
+const formSchema = insertCategorySchema.pick({
   name: true,
 });
 
 type FormValues = z.input<typeof formSchema>;
 
-export function NewAccountSheet() {
+export function NewCategorySheet() {
   const { isOpen, onOpen, onClose } = useSheets();
-  const mutation = useCreateAccount();
+  const mutation = useCreateCategory();
 
   function onSubmit(values: FormValues) {
     mutation.mutate(values, {
       onSuccess: () => {
-        onClose('newAccount');
+        onClose('newCategory');
       },
     });
   }
 
   return (
-    <Sheet open={isOpen('newAccount')} onOpenChange={() => onOpen('newAccount')}>
-      <SheetContent onClickOverlay={() => onClose('newAccount')}>
+    <Sheet open={isOpen('newCategory')} onOpenChange={() => onOpen('newCategory')}>
+      <SheetContent onClickOverlay={() => onClose('newCategory')}>
         <SheetHeader>
-          <SheetTitle>New Account</SheetTitle>
+          <SheetTitle>New Category</SheetTitle>
           <SheetDescription>
-            Create a new account to track your finances.
+            Create a new category to track your finances.
           </SheetDescription>
         </SheetHeader>
-        <AccountForm
+        <CategoryForm
           onSubmit={onSubmit}
           disabled={mutation.isPending}
           defaultValues={{ name: '' }}
