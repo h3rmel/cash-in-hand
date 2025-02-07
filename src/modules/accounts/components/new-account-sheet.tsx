@@ -3,7 +3,7 @@
 import { z } from 'zod';
 
 import { AccountForm } from '@/modules/accounts/components';
-import { useCreateAccount } from '@/modules/accounts/hooks';
+import { useCreateAccount } from '@/modules/accounts/services';
 
 import {
   Sheet,
@@ -36,7 +36,7 @@ export function NewAccountSheet() {
 
   return (
     <Sheet open={isOpen('newAccount')} onOpenChange={() => onOpen('newAccount')}>
-      <SheetContent>
+      <SheetContent onClickOverlay={() => onClose('newAccount')}>
         <SheetHeader>
           <SheetTitle>New Account</SheetTitle>
           <SheetDescription>

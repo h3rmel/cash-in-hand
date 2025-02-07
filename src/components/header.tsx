@@ -5,32 +5,31 @@ import { cn } from '@/lib/utils';
 
 import { HeaderLogo } from './header-logo';
 import { Navigation } from './navigation';
+import { ThemeToggle } from './theme-toggle';
 import { WelcomeMessage } from './welcome-message';
 
 export function Header() {
   return (
     <header
-      className={cn(
-        'bg-gradient-to-b from-emerald-700 to-emerald-500',
-        'px-4 pt-4 lg:px-8 pb-28',
-      )}
+      className={cn('sticky top-0 left-0', 'h-20', 'border border-b', 'backdrop-blur')}
     >
-      <section
+      <nav
         className={cn(
-          'max-w-screen-xl w-full',
+          'max-w-screen-2xl w-full h-full',
           'mx-auto',
-          'flex flex-col justify-between',
+          'flex items-center justify-between',
+          'lg:border-x px-6',
         )}
       >
-        <div className={cn('flex items-center justify-between lg:gap-16')}>
-          <HeaderLogo />
-          <Navigation />
+        <HeaderLogo />
+        <Navigation />
+        <div className={cn('flex items-center gap-4')}>
+          <ThemeToggle />
           <UserButton
             fallback={<LoaderCircle className="animate-spin text-background size-7" />}
           />
         </div>
-        <WelcomeMessage />
-      </section>
+      </nav>
     </header>
   );
 }

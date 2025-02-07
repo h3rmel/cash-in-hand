@@ -6,6 +6,7 @@ import '@/assets/globals.css';
 
 import { ClerkProvider } from '@clerk/nextjs';
 
+import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
 import { cn } from '@/lib/utils';
@@ -30,7 +31,7 @@ type RootLayoutProps = Readonly<{
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <ClerkProvider afterSignOutUrl="/">
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
             'w-full min-h-screen font-sans antialiased',
@@ -38,11 +39,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
             geistSans.variable,
           )}
         >
-          <QueryProvider>
-            <SheetProvider />
-            <Toaster />
-            {children}
-          </QueryProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <QueryProvider>
+              <SheetProvider />
+              <Toaster />
+              {children}
+            </QueryProvider>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

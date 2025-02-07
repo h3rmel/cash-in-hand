@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { usePathname, useRouter } from 'next/navigation';
 
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
@@ -14,6 +14,7 @@ import { NavigationButton } from './navigation-button';
 import { Button } from './ui/button';
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetTitle,
@@ -66,7 +67,7 @@ export function Navigation() {
     return (
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <Button variant="nav" size="icon" className="bg-background/10">
+          <Button variant="outline" size="icon" className="bg-background/10">
             <Menu className={cn('size-4')} />
           </Button>
         </SheetTrigger>

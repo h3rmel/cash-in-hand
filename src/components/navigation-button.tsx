@@ -15,8 +15,8 @@ export function NavigationButton({ href, label, isActive }: NavigationButtonProp
     <Button
       asChild
       size="sm"
-      variant="nav"
-      className={cn(isActive ? 'bg-white/10' : 'bg-transparent')}
+      variant="ghost"
+      className={cn(isActive ? 'bg-foreground/10' : 'bg-transparent')}
     >
       <Link href={href}>{label}</Link>
     </Button>

@@ -71,7 +71,7 @@ export function AccountForm({
             <Loader2 className="animate-spin" />
           )}
         </Button>
-        {Boolean(id) && (
+        {Boolean(id) ? (
           <Button
             className="w-full"
             variant="outline"
@@ -82,7 +82,7 @@ export function AccountForm({
             <Trash className="size-4" />
             Delete Account
           </Button>
-        )}
+        ) : null}
       </form>
     </Form>
   );

@@ -5,7 +5,7 @@ import noSecrets from 'eslint-plugin-no-secrets';
 import tseslint from 'typescript-eslint';
 
 const eslintConfig = tseslint.config({
-  extends: [eslint.configs.recommended, tseslint.configs.recommendedTypeChecked],
+  extends: ["next/core-web-vitals", "next/typescript", eslint.configs.recommended, tseslint.configs.recommendedTypeChecked],
   plugins: {
     'no-secrets': noSecrets,
     'check-file': checkFile,
