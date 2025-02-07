@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 
 import { client } from '@/lib/hono';
+import { cn } from '@/lib/utils';
 
 import { AccountActions } from '../account-actions';
 
@@ -53,6 +54,10 @@ export const columns: ColumnDef<ResponseType>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => <AccountActions id={row.original.id} />,
+    cell: ({ row }) => (
+      <div className={cn('w-full', 'flex justify-end')}>
+        <AccountActions id={row.original.id} />
+      </div>
+    ),
   },
 ];

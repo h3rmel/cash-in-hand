@@ -37,7 +37,7 @@ export default function AccountsPage() {
   // if (accountsQuery.isLoading) {
   if (accountsQuery.isLoading) {
     return (
-      <section className={cn('flex flex-col gap-4')}>
+      <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
         <hgroup
           className={cn(
             'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
