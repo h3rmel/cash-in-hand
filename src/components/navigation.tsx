@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { usePathname, useRouter } from 'next/navigation';
 
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
@@ -14,7 +14,6 @@ import { NavigationButton } from './navigation-button';
 import { Button } from './ui/button';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetTitle,

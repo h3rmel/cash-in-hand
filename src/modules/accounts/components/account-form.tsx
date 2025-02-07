@@ -71,7 +71,7 @@ export function AccountForm({
             <Loader2 className="animate-spin" />
           )}
         </Button>
-        {Boolean(id) ? (
+        {id ? (
           <Button
             className="w-full"
             variant="outline"

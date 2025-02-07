@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { HeaderLogo } from './header-logo';
 import { Navigation } from './navigation';
 import { ThemeToggle } from './theme-toggle';
-import { WelcomeMessage } from './welcome-message';
 
 export function Header() {
   return (

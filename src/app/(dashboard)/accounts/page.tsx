@@ -19,7 +19,7 @@ export default function AccountsPage() {
   const accountsQuery = useGetAccounts();
   const deleteAccounts = useBulkDeleteAccount();
 
-  const accounts = accountsQuery.data || [];
+  const accounts = accountsQuery.data ?? [];
 
   const isDisabled = accountsQuery.isLoading || deleteAccounts.isPending;
 

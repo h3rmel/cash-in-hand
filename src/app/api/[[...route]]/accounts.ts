@@ -132,7 +132,7 @@ const app = new Hono()
         .where(and(eq(accounts.userId, auth.userId), eq(accounts.id, id)))
         .returning();
 
-      if (!data) {
+      if (data) {
         return c.json({ error: 'Account not found.' }, 404);
       }
 

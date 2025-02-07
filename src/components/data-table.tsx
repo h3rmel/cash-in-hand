@@ -79,10 +79,10 @@ export function DataTable<TData, TValue>({
       {/* Header: Filtering and Actions */}
       <div className="flex items-center py-4">
         <Input
-          placeholder={`Filter ${filterKey}...`}
-          value={(table.getColumn(filterKey)?.getFilterValue() as string) ?? ''}
+          placeholder={`Filter ${String(filterKey)}...`}
+          value={table.getColumn(String(filterKey))?.getFilterValue() as string}
           onChange={(event) =>
-            table.getColumn(filterKey)?.setFilterValue(event.target.value)
+            table.getColumn(String(filterKey))?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -124,7 +124,7 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (

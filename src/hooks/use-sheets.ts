@@ -24,6 +24,6 @@ export const useSheets = create<SheetsState>((set, get) => ({
     set((state) => ({
       sheets: { ...state.sheets, [key]: { isOpen: false, id: undefined } },
     })),
-  isOpen: (key: SheetKeys) => get().sheets[key]?.isOpen || false,
-  getId: (key: SheetKeys) => get().sheets[key]?.id,
+  isOpen: (key: SheetKeys) => get().sheets[key].isOpen || false,
+  getId: (key: SheetKeys) => get().sheets[key].id,
 }));
