@@ -4,7 +4,9 @@ import { toast } from 'sonner';
 
 import { client } from '@/lib/hono';
 
-type ResponseType = InferResponseType<(typeof client.api.accounts)[':id']['$patch']>;
+type ResponseType = InferResponseType<
+  (typeof client.api.accounts)[':id']['$patch']
+>;
 type RequestType = InferRequestType<
   (typeof client.api.accounts)[':id']['$patch']
 >['json'];

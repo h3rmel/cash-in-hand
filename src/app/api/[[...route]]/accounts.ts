@@ -101,7 +101,12 @@ const app = new Hono()
 
       const data = await db
         .delete(accounts)
-        .where(and(eq(accounts.userId, auth.userId), inArray(accounts.id, values.ids)))
+        .where(
+          and(
+            eq(accounts.userId, auth.userId),
+            inArray(accounts.id, values.ids),
+          ),
+        )
         .returning({ id: accounts.id });
 
       return c.json({ data });

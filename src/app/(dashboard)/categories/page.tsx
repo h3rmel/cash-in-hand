@@ -4,6 +4,10 @@ import { Row } from '@tanstack/react-table';
 import { Plus } from 'lucide-react';
 
 import { columns } from '@/modules/categories/components';
+import {
+  useBulkDeleteCategory,
+  useGetCategories,
+} from '@/modules/categories/services';
 
 import { DataTable } from '@/components/data-table';
 import { Button } from '@/components/ui/button';
@@ -12,7 +16,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
 import { useSheets } from '@/hooks/use-sheets';
-import { useBulkDeleteCategory, useGetCategories } from '@/modules/categories/services';
 
 export default function CategoriesPage() {
   const { onOpen } = useSheets();
@@ -62,7 +65,9 @@ export default function CategoriesPage() {
             'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
           )}
         >
-          <h2 className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}>
+          <h2
+            className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}
+          >
             Categories Page
           </h2>
           <Button

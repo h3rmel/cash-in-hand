@@ -4,7 +4,10 @@ import { Row } from '@tanstack/react-table';
 import { Plus } from 'lucide-react';
 
 import { columns } from '@/modules/accounts/components';
-import { useBulkDeleteAccount, useGetAccounts } from '@/modules/accounts/services';
+import {
+  useBulkDeleteAccount,
+  useGetAccounts,
+} from '@/modules/accounts/services';
 
 import { DataTable } from '@/components/data-table';
 import { Button } from '@/components/ui/button';
@@ -61,7 +64,9 @@ export default function AccountsPage() {
             'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
           )}
         >
-          <h2 className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}>
+          <h2
+            className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}
+          >
             Accounts Page
           </h2>
           <Button

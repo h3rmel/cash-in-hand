@@ -7,7 +7,9 @@ export function useGetCategory(id: string) {
     enabled: Boolean(id),
     queryKey: ['category', { id }],
     queryFn: async () => {
-      const response = await client.api.categories[':id']['$get']({ param: { id } });
+      const response = await client.api.categories[':id']['$get']({
+        param: { id },
+      });
 
       if (!response.ok) {
         throw new Error('Failed to fetch category');

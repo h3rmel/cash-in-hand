@@ -54,15 +54,23 @@ export function EditCategorySheet() {
   }
 
   const defaultValues = categoryQuery.data
-    ? { name: categoryQuery.data.name, description: categoryQuery.data.description }
+    ? {
+        name: categoryQuery.data.name,
+        description: categoryQuery.data.description,
+      }
     : { name: '', description: '' };
 
   return (
-    <Sheet open={isOpen('editCategory')} onOpenChange={() => onOpen('editCategory')}>
+    <Sheet
+      open={isOpen('editCategory')}
+      onOpenChange={() => onOpen('editCategory')}
+    >
       <SheetContent onClickOverlay={() => onClose('editCategory')}>
         <SheetHeader>
           <SheetTitle>Edit Category</SheetTitle>
-          <SheetDescription>Update an category to track your finances.</SheetDescription>
+          <SheetDescription>
+            Update an category to track your finances.
+          </SheetDescription>
         </SheetHeader>
         {!categoryQuery.isLoading ? (
           <CategoryForm

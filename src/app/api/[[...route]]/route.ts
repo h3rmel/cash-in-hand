@@ -17,7 +17,9 @@ app.onError((err, c) => {
   return c.json({ error: 'Internal Error.' }, 500);
 });
 
-const routes = app.route('/accounts', accounts).route('/categories', categories);
+const routes = app
+  .route('/accounts', accounts)
+  .route('/categories', categories);
 
 export const GET = handle(app);
 export const POST = handle(app);

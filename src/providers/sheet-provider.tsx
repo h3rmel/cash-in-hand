@@ -1,7 +1,13 @@
 'use client';
 
-import { EditAccountSheet, NewAccountSheet } from '@/modules/accounts/components';
-import { EditCategorySheet, NewCategorySheet } from '@/modules/categories/components';
+import {
+  EditAccountSheet,
+  NewAccountSheet,
+} from '@/modules/accounts/components';
+import {
+  EditCategorySheet,
+  NewCategorySheet,
+} from '@/modules/categories/components';
 
 export function SheetProvider() {
   return (

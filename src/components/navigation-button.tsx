@@ -10,7 +10,11 @@ type NavigationButtonProps = {
   isActive: boolean;
 };
 
-export function NavigationButton({ href, label, isActive }: NavigationButtonProps) {
+export function NavigationButton({
+  href,
+  label,
+  isActive,
+}: NavigationButtonProps) {
   return (
     <Button
       asChild

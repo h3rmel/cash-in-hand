@@ -73,7 +73,9 @@ export function Navigation() {
         <SheetContent side="left" className={cn('px-2')}>
           <div className="hidden" aria-hidden="true">
             <SheetTitle>Dashboard Sheet</SheetTitle>
-            <SheetDescription>Dashboard Sheet with navigation options.</SheetDescription>
+            <SheetDescription>
+              Dashboard Sheet with navigation options.
+            </SheetDescription>
           </div>
           <nav className={cn('flex flex-col gap-2', 'pt-6')}>
             {routes.map((route) => (
@@ -93,7 +95,9 @@ export function Navigation() {
   }
 
   return (
-    <nav className={cn('hidden lg:flex', 'items-center gap-2', 'overflow-x-auto')}>
+    <nav
+      className={cn('hidden lg:flex', 'items-center gap-2', 'overflow-x-auto')}
+    >
       {routes.map((route) => (
         <NavigationButton
           key={route.label}

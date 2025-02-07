@@ -108,7 +108,10 @@ const app = new Hono()
       const data = await db
         .delete(categories)
         .where(
-          and(eq(categories.userId, auth.userId), inArray(categories.id, values.ids)),
+          and(
+            eq(categories.userId, auth.userId),
+            inArray(categories.id, values.ids),
+          ),
         )
         .returning({ id: categories.id });
 
@@ -120,7 +123,10 @@ const app = new Hono()
     '/:id',
     clerkMiddleware(),
     zValidator('param', z.object({ id: z.string().optional() })),
-    zValidator('json', insertCategorySchema.pick({ name: true, description: true })),
+    zValidator(
+      'json',
+      insertCategorySchema.pick({ name: true, description: true }),
+    ),
     async (c) => {
       const auth = getAuth(c);
       const { id } = c.req.valid('param');

@@ -35,7 +35,10 @@ export function NewCategorySheet() {
   }
 
   return (
-    <Sheet open={isOpen('newCategory')} onOpenChange={() => onOpen('newCategory')}>
+    <Sheet
+      open={isOpen('newCategory')}
+      onOpenChange={() => onOpen('newCategory')}
+    >
       <SheetContent onClickOverlay={() => onClose('newCategory')}>
         <SheetHeader>
           <SheetTitle>New Category</SheetTitle>

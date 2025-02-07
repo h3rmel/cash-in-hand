@@ -10,7 +10,12 @@ import { ThemeToggle } from './theme-toggle';
 export function Header() {
   return (
     <header
-      className={cn('sticky top-0 left-0', 'h-20', 'border border-b', 'backdrop-blur')}
+      className={cn(
+        'sticky top-0 left-0',
+        'h-20',
+        'border border-b',
+        'backdrop-blur',
+      )}
     >
       <nav
         className={cn(
@@ -25,7 +30,9 @@ export function Header() {
         <div className={cn('flex items-center gap-4')}>
           <ThemeToggle />
           <UserButton
-            fallback={<LoaderCircle className="animate-spin text-background size-7" />}
+            fallback={
+              <LoaderCircle className="animate-spin text-background size-7" />
+            }
           />
         </div>
       </nav>

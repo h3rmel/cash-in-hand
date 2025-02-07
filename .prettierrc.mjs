@@ -10,7 +10,10 @@ const config = {
   endOfLine: 'auto',
   bracketSpacing: true,
   bracketSameLine: false,
-  plugins: ['prettier-plugin-tailwindcss', '@ianvs/prettier-plugin-sort-imports'],
+  plugins: [
+    'prettier-plugin-tailwindcss',
+    '@ianvs/prettier-plugin-sort-imports',
+  ],
   importOrder: [
     '',
     '^react$',

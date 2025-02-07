@@ -56,11 +56,16 @@ export function EditAccountSheet() {
     : { name: '' };
 
   return (
-    <Sheet open={isOpen('editAccount')} onOpenChange={() => onOpen('editAccount')}>
+    <Sheet
+      open={isOpen('editAccount')}
+      onOpenChange={() => onOpen('editAccount')}
+    >
       <SheetContent onClickOverlay={() => onClose('editAccount')}>
         <SheetHeader>
           <SheetTitle>Edit Account</SheetTitle>
-          <SheetDescription>Update an account to track your finances.</SheetDescription>
+          <SheetDescription>
+            Update an account to track your finances.
+          </SheetDescription>
         </SheetHeader>
         {!accountQuery.isLoading ? (
           <AccountForm

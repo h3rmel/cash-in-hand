@@ -2,6 +2,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import tseslint from 'typescript-eslint';
@@ -11,14 +12,15 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
 });
 
 const eslintConfig = [
   eslintPluginPrettierRecommended,
   ...tseslint.configs.recommended,
   jsdoc.configs['flat/recommended-typescript'],
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   ...compat.plugins('no-secrets', 'check-file', 'jsx-a11y'),
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
   ...compat.config({
     ignorePatterns: [
       'node_modules/',
@@ -29,6 +31,7 @@ const eslintConfig = [
       'dist/',
       'build/',
       'src/components/ui/*.*',
+      '/*.*',
     ],
     processor: 'check-file/eslint-processor-check-file',
     rules: {
@@ -96,6 +99,9 @@ const eslintConfig = [
         'error',
         {
           '**/*.{js,jsx,ts,tsx}': 'KEBAB_CASE',
+        },
+        {
+          ignoreMiddleExtensions: true,
         },
       ],
       /**

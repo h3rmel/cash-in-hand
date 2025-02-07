@@ -33,7 +33,10 @@ export function NewAccountSheet() {
   }
 
   return (
-    <Sheet open={isOpen('newAccount')} onOpenChange={() => onOpen('newAccount')}>
+    <Sheet
+      open={isOpen('newAccount')}
+      onOpenChange={() => onOpen('newAccount')}
+    >
       <SheetContent onClickOverlay={() => onClose('newAccount')}>
         <SheetHeader>
           <SheetTitle>New Account</SheetTitle>

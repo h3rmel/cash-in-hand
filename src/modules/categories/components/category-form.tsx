@@ -4,13 +4,19 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 import { cn } from '@/lib/utils';
 
 import { insertCategorySchema } from '@/database/schema';
-import { Textarea } from '@/components/ui/textarea';
 
 const formSchema = insertCategorySchema.pick({
   name: true,
@@ -49,7 +55,10 @@ export function CategoryForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className={cn('space-y-4 pt-4')}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className={cn('space-y-4 pt-4')}
+      >
         <FormField
           name="name"
           control={form.control}
