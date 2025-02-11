@@ -86,9 +86,9 @@ const app = new Hono()
       return c.json({ data });
     },
   )
-  // Bulk delete accounts
-  .post(
-    '/bulk-delete',
+  // Delete one or more accounts
+  .delete(
+    '/',
     clerkMiddleware(),
     zValidator('json', z.object({ ids: z.array(z.string()) })),
     async (c) => {

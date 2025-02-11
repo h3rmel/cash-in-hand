@@ -92,9 +92,9 @@ const app = new Hono()
       return c.json({ data });
     },
   )
-  // Bulk delete categories
-  .post(
-    '/bulk-delete',
+  // Delete one or more categories
+  .delete(
+    '/',
     clerkMiddleware(),
     zValidator('json', z.object({ ids: z.array(z.string()) })),
     async (c) => {
@@ -148,6 +148,34 @@ const app = new Hono()
 
       if (data) {
         return c.json({ error: 'category not found.' }, 404);
+      }
+
+      return c.json({ data });
+    },
+  )
+  .delete(
+    '/:id',
+    clerkMiddleware(),
+    zValidator('param', z.object({ id: z.string().optional() })),
+    async (c) => {
+      const auth = getAuth(c);
+      const { id } = c.req.valid('param');
+
+      if (!auth?.userId) {
+        return c.json({ error: 'Unauthorized.' }, 401);
+      }
+
+      if (!id) {
+        return c.json({ error: 'Missing Id.' }, 400);
+      }
+
+      const [data] = await db
+        .delete(categories)
+        .where(and(eq(categories.userId, auth.userId), eq(categories.id, id)))
+        .returning({ id: categories.id });
+
+      if (!data) {
+        return c.json({ error: 'Not found' }, 404);
       }
 
       return c.json({ data });

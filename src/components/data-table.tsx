@@ -47,7 +47,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [ConfirmDialog, confirm] = useConfirm({
     title: 'Are you sure?',
-    message: 'You are about to perform a bulk delete.',
+    message: 'You are about to perform a delete.',
   });
 
   const [sorting, setSorting] = React.useState<SortingState>([]);

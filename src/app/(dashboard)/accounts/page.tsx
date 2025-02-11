@@ -3,25 +3,24 @@
 import { Row } from '@tanstack/react-table';
 import { Plus } from 'lucide-react';
 
-import { columns } from '@/modules/accounts/components';
-import {
-  useBulkDeleteAccount,
-  useGetAccounts,
-} from '@/modules/accounts/services';
-
 import { DataTable } from '@/components/data-table';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { cn } from '@/lib/utils';
 
+import { columns } from '@/features/accounts/components';
+import {
+  useDeleteAccounts,
+  useGetAccounts,
+} from '@/features/accounts/services';
 import { useSheets } from '@/hooks/use-sheets';
 
 export default function AccountsPage() {
   const { onOpen } = useSheets();
 
   const accountsQuery = useGetAccounts();
-  const deleteAccounts = useBulkDeleteAccount();
+  const deleteAccounts = useDeleteAccounts();
 
   const accounts = accountsQuery.data ?? [];
   const isDisabled = accountsQuery.isLoading || deleteAccounts.isPending;

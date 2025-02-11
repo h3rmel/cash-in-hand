@@ -3,11 +3,11 @@
 import { Row } from '@tanstack/react-table';
 import { Plus } from 'lucide-react';
 
-import { columns } from '@/modules/categories/components';
+import { columns } from '@/features/categories/components';
 import {
-  useBulkDeleteCategory,
+  useDeleteCategories,
   useGetCategories,
-} from '@/modules/categories/services';
+} from '@/features/categories/services';
 
 import { DataTable } from '@/components/data-table';
 import { Button } from '@/components/ui/button';
@@ -21,7 +21,7 @@ export default function CategoriesPage() {
   const { onOpen } = useSheets();
 
   const categoriesQuery = useGetCategories();
-  const deleteCategories = useBulkDeleteCategory();
+  const deleteCategories = useDeleteCategories();
 
   const accounts = categoriesQuery.data ?? [];
   const isDisabled = categoriesQuery.isLoading || deleteCategories.isPending;

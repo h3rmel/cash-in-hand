@@ -6,8 +6,9 @@ import '@/assets/globals.css';
 
 import { ClerkProvider } from '@clerk/nextjs';
 
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/theme/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 import { cn } from '@/lib/utils';
 
@@ -40,11 +41,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="dark">
-            <QueryProvider>
-              <SheetProvider />
-              <Toaster />
-              {children}
-            </QueryProvider>
+            <TooltipProvider>
+              <QueryProvider>
+                <SheetProvider />
+                <Toaster />
+                {children}
+              </QueryProvider>
+            </TooltipProvider>
           </ThemeProvider>
         </body>
       </html>

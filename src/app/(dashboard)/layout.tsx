@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Header } from '@/components/header';
+import { Header } from '@/components/layout/header';
 
 import { cn } from '@/lib/utils';
 
