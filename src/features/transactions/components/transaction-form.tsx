@@ -5,6 +5,7 @@ import { z } from 'zod';
 
 import { AmountInput } from '@/components/amount-input';
 import { DatePicker } from '@/components/data-picker';
+import { Select } from '@/components/select';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -15,13 +16,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 
 import { cn, convertAmountToMiliunits } from '@/lib/utils';
@@ -67,6 +61,8 @@ type TransactionFormProps = {
   disabled?: boolean;
   accountOptions: { label: string; value: string }[];
   categoryOptions: { label: string; value: string }[];
+  onCreateAccount: (name: string) => void;
+  onCreateCategory: (name: string) => void;
 };
 
 export function TransactionForm({
@@ -77,6 +73,8 @@ export function TransactionForm({
   onDelete,
   accountOptions,
   categoryOptions,
+  onCreateAccount,
+  onCreateCategory,
 }: TransactionFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -135,26 +133,14 @@ export function TransactionForm({
               </FormLabel>
               <FormControl>
                 <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select an account" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {accountOptions.map(
-                      (account: { label: string; value: string }) => (
-                        <SelectItem key={account.value} value={account.value}>
-                          {account.label}
-                        </SelectItem>
-                      ),
-                    )}
-                  </SelectContent>
-                </Select>
+                  placeholder="Select an account"
+                  options={accountOptions}
+                  onCreate={onCreateAccount}
+                  value={field.value}
+                  onChange={field.onChange}
+                  disabled={disabled}
+                />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -167,24 +153,13 @@ export function TransactionForm({
             <FormItem>
               <FormLabel>Category</FormLabel>
               <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value ?? undefined}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a category" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {categoryOptions.map(
-                    (category: { label: string; value: string }) => (
-                      <SelectItem key={category.value} value={category.value}>
-                        {category.label}
-                      </SelectItem>
-                    ),
-                  )}
-                </SelectContent>
-              </Select>
+                placeholder="Select a category"
+                options={categoryOptions}
+                onCreate={onCreateCategory}
+                value={field.value}
+                onChange={field.onChange}
+                disabled={disabled}
+              />
             </FormItem>
           )}
         />

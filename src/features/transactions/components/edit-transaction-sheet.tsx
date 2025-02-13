@@ -1,6 +1,12 @@
 import { Loader2 } from 'lucide-react';
 import { z } from 'zod';
 
+import { useCreateAccount, useGetAccounts } from '@/features/accounts/services';
+import {
+  useCreateCategory,
+  useGetCategories,
+} from '@/features/categories/services';
+
 import {
   Sheet,
   SheetContent,
@@ -10,11 +16,6 @@ import {
 } from '@/components/ui/sheet';
 
 import { insertTransactionSchema } from '@/database/schema';
-import { useCreateAccount, useGetAccounts } from '@/features/accounts/services';
-import {
-  useCreateCategory,
-  useGetCategories,
-} from '@/features/categories/services';
 import { useConfirm } from '@/hooks/use-confirm';
 import { useSheets } from '@/hooks/use-sheets';
 
@@ -47,6 +48,11 @@ export function EditTransactionSheet() {
   // #region Categories
 
   const categoryQuery = useGetCategories();
+  const categoryMutation = useCreateCategory();
+
+  function onCreateCategory(name: string) {
+    categoryMutation.mutate({ name });
+  }
 
   const categoryOptions = (categoryQuery.data ?? []).map((category) => ({
     label: category.name,
@@ -58,6 +64,11 @@ export function EditTransactionSheet() {
   // #region Accounts
 
   const accountQuery = useGetAccounts();
+  const accountMutation = useCreateAccount();
+
+  function onCreateAccount(name: string) {
+    accountMutation.mutate({ name });
+  }
 
   const accountOptions = (accountQuery.data ?? []).map((account) => ({
     label: account.name,
@@ -149,6 +160,8 @@ export function EditTransactionSheet() {
             defaultValues={defaultValues}
             accountOptions={accountOptions}
             categoryOptions={categoryOptions}
+            onCreateAccount={onCreateAccount}
+            onCreateCategory={onCreateCategory}
           />
         ) : (
           <Loader2 className="size-4 mx-auto my-4 animate-spin text-muted-foreground" />

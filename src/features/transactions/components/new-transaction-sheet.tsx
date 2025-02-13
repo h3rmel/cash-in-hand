@@ -40,17 +40,27 @@ export function NewTransactionSheet() {
   // #region Categories
 
   const categoryQuery = useGetCategories();
+  const categoryMutation = useCreateCategory();
 
   const categoryOptions = (categoryQuery.data ?? []).map((category) => ({
     label: category.name,
     value: category.id,
   }));
 
+  function onCreateCategory(name: string) {
+    categoryMutation.mutate({ name });
+  }
+
   // #endregion
 
   // #region Accounts
 
   const accountQuery = useGetAccounts();
+  const accountMutation = useCreateAccount();
+
+  function onCreateAccount(name: string) {
+    accountMutation.mutate({ name });
+  }
 
   const accountOptions = (accountQuery.data ?? []).map((account) => ({
     label: account.name,
@@ -93,6 +103,8 @@ export function NewTransactionSheet() {
             disabled={isPending}
             accountOptions={accountOptions}
             categoryOptions={categoryOptions}
+            onCreateAccount={onCreateAccount}
+            onCreateCategory={onCreateCategory}
             defaultValues={{
               amount: '',
               accountId: '',

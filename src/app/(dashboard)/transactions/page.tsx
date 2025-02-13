@@ -1,34 +1,93 @@
 'use client';
 
-import { Row } from '@tanstack/react-table';
-import { Plus } from 'lucide-react';
+import { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import { Row } from '@tanstack/react-table';
+import { toast } from 'sonner';
+
+import { useSelectAccount } from '@/features/accounts/hooks/use-select-account';
+import {
+  columns,
+  ImportSection,
+  TransactionsSection,
+} from '@/features/transactions/components';
+import {
+  useBulkCreateTransactions,
+  useDeleteTransactions,
+  useGetTransactions,
+} from '@/features/transactions/services';
+
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { cn } from '@/lib/utils';
 
-import {
-  useDeleteTransactions,
-  useGetTransactions,
-} from '@/features/transactions/services';
+import { transactions as transactionsSchema } from '@/database/schema';
 import { useSheets } from '@/hooks/use-sheets';
-import { DataTable } from '@/components/data-table';
-import { columns } from '@/features/transactions/components';
+
+enum VARIANTS {
+  LIST = 'LIST',
+  IMPORT = 'IMPORT',
+}
+
+const INITIAL_IMPORT_RESULTS = {
+  data: [],
+  errors: [],
+  meta: {},
+};
 
 export default function TransactionsPage() {
+  const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
+  const [importResults, setImportResults] = useState<
+    typeof INITIAL_IMPORT_RESULTS
+  >(INITIAL_IMPORT_RESULTS);
+
   const { onOpen } = useSheets();
+  const [AccountDialog, confirm] = useSelectAccount();
 
   const transactionQuery = useGetTransactions();
+  const bulkCreateTransactions = useBulkCreateTransactions();
   const deleteTransactions = useDeleteTransactions();
 
   const transactions = transactionQuery.data ?? [];
   const isDisabled = transactionQuery.isLoading || deleteTransactions.isPending;
 
+  // #region Handlers
+
   function handleOnDelete(rows: Row<any>[]) {
     const ids = rows.map((r) => r.original.id);
     deleteTransactions.mutate({ ids });
   }
+
+  function onUpload(results: typeof INITIAL_IMPORT_RESULTS) {
+    setVariant(VARIANTS.IMPORT);
+    setImportResults(results);
+  }
+
+  function onCancelImport() {
+    setImportResults(INITIAL_IMPORT_RESULTS);
+    setVariant(VARIANTS.LIST);
+  }
+
+  async function onSubmitImport(
+    values: (typeof transactionsSchema.$inferInsert)[],
+  ) {
+    const accountId = await confirm();
+
+    if (!accountId) return toast.error('Please select an account.');
+
+    const data = values.map((value) => ({
+      ...value,
+      accountId: accountId as string,
+    }));
+
+    bulkCreateTransactions.mutate(data, {
+      onSuccess: () => {
+        onCancelImport();
+      }
+    });
+  }
+
+  // #endregion
 
   if (transactionQuery.isLoading) {
     return (
@@ -49,34 +108,36 @@ export default function TransactionsPage() {
     );
   }
 
+  function renderSections() {
+    switch (variant) {
+      case VARIANTS.LIST:
+        return (
+          <TransactionsSection
+            onOpen={() => onOpen('newTransaction')}
+            onUpload={onUpload}
+            transactions={transactions}
+            columns={columns}
+            isDisabled={isDisabled}
+            handleOnDelete={handleOnDelete}
+          />
+        );
+      case VARIANTS.IMPORT:
+        return (
+          <>
+            <AccountDialog />
+            <ImportSection
+              importResults={importResults}
+              onCancelImport={onCancelImport}
+              onSubmitImport={onSubmitImport}
+            />
+          </>
+        );
+    }
+  }
+
   return (
     <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
-      <hgroup
-        className={cn(
-          'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
-        )}
-      >
-        <h2
-          className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}
-        >
-          Transactions History
-        </h2>
-        <Button
-          size="sm"
-          onClick={() => onOpen('newTransaction')}
-          className="w-full lg:w-auto"
-        >
-          <Plus className="size-4" />
-          Add new
-        </Button>
-      </hgroup>
-      <DataTable
-        disable={isDisabled}
-        onDelete={handleOnDelete}
-        data={transactions}
-        columns={columns}
-        filterKey="payee"
-      />
+      {renderSections()}
     </section>
   );
 }
