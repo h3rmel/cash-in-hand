@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  DataCharts,
-  DataGrid,
-  WelcomeMessage,
-} from '@/features/summary/components';
+import { DataCharts, DataGrid } from '@/features/summary/components';
 import { useGetSummary } from '@/features/summary/services/use-get-summary';
 
 import { cn } from '@/lib/utils';
