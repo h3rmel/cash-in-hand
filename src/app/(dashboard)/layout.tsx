@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         className={cn(
           'max-w-screen-2xl w-full',
           'mx-auto',
-          'px-4 lg:px-8 pt-12',
+          'px-4 lg:px-8 pt-4 lg:pt-8',
           'lg:border-x',
         )}
       >

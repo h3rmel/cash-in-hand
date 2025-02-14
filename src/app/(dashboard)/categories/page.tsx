@@ -40,7 +40,7 @@ export default function CategoriesPage() {
 
   if (categoriesQuery.isLoading) {
     return (
-      <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
+      <section className={cn('flex flex-col gap-4', 'min-h-[88dvh]')}>
         <hgroup
           className={cn(
             'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
@@ -58,35 +58,33 @@ export default function CategoriesPage() {
   }
 
   return (
-    <>
-      <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
-        <hgroup
-          className={cn(
-            'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
-          )}
+    <section className={cn('flex flex-col gap-4', 'min-h-[88dvh]')}>
+      <hgroup
+        className={cn(
+          'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
+        )}
+      >
+        <h2
+          className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}
         >
-          <h2
-            className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}
-          >
-            Categories Page
-          </h2>
-          <Button
-            size="sm"
-            className="w-full lg:w-auto"
-            onClick={() => onOpen('newCategory')}
-          >
-            <Plus className="size-4" />
-            Add new
-          </Button>
-        </hgroup>
-        <DataTable
-          disable={isDisabled}
-          onDelete={handleOnDelete}
-          data={accounts}
-          columns={columns}
-          filterKey="name"
-        />
-      </section>
-    </>
+          Categories Page
+        </h2>
+        <Button
+          size="sm"
+          className="w-full lg:w-auto"
+          onClick={() => onOpen('newCategory')}
+        >
+          <Plus className="size-4" />
+          Add new
+        </Button>
+      </hgroup>
+      <DataTable
+        disable={isDisabled}
+        onDelete={handleOnDelete}
+        data={accounts}
+        columns={columns}
+        filterKey="name"
+      />
+    </section>
   );
 }

@@ -9,5 +9,6 @@
     "README.md": "*.md",
     "next.config.ts": "eslint*, .prettier*",
     ".env": ".env*"
-  }
+  },
+  "typescript.preferences.autoImportFileExcludePatterns": ["@radix-ui/*"]
 }

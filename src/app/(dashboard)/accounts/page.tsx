@@ -3,17 +3,18 @@
 import { Row } from '@tanstack/react-table';
 import { Plus } from 'lucide-react';
 
+import { columns } from '@/features/accounts/components';
+import {
+  useDeleteAccounts,
+  useGetAccounts,
+} from '@/features/accounts/services';
+
 import { DataTable } from '@/components/data-table';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { cn } from '@/lib/utils';
 
-import { columns } from '@/features/accounts/components';
-import {
-  useDeleteAccounts,
-  useGetAccounts,
-} from '@/features/accounts/services';
 import { useSheets } from '@/hooks/use-sheets';
 
 export default function AccountsPage() {
@@ -38,7 +39,7 @@ export default function AccountsPage() {
 
   if (accountsQuery.isLoading) {
     return (
-      <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
+      <section className={cn('flex flex-col gap-4', 'min-h-[88dvh]')}>
         <hgroup
           className={cn(
             'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
@@ -56,35 +57,33 @@ export default function AccountsPage() {
   }
 
   return (
-    <>
-      <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
-        <hgroup
-          className={cn(
-            'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
-          )}
+    <section className={cn('flex flex-col gap-4', 'min-h-[88dvh]')}>
+      <hgroup
+        className={cn(
+          'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
+        )}
+      >
+        <h2
+          className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}
         >
-          <h2
-            className={cn('text-2xl font-semibold tracking-tight line-clamp-1')}
-          >
-            Accounts Page
-          </h2>
-          <Button
-            size="sm"
-            className="w-full lg:w-auto"
-            onClick={() => onOpen('newAccount')}
-          >
-            <Plus className="size-4" />
-            Add new
-          </Button>
-        </hgroup>
-        <DataTable
-          disable={isDisabled}
-          onDelete={handleOnDelete}
-          data={accounts}
-          columns={columns}
-          filterKey="name"
-        />
-      </section>
-    </>
+          Accounts Page
+        </h2>
+        <Button
+          size="sm"
+          className="w-full lg:w-auto"
+          onClick={() => onOpen('newAccount')}
+        >
+          <Plus className="size-4" />
+          Add new
+        </Button>
+      </hgroup>
+      <DataTable
+        disable={isDisabled}
+        onDelete={handleOnDelete}
+        data={accounts}
+        columns={columns}
+        filterKey="name"
+      />
+    </section>
   );
 }

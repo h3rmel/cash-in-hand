@@ -1,7 +1,7 @@
 import { clerkMiddleware, getAuth } from '@hono/clerk-auth';
 import { zValidator } from '@hono/zod-validator';
 import { createId } from '@paralleldrive/cuid2';
-import { addDays, parse, subDays } from 'date-fns';
+import { addDays, getDate, parse, subDays } from 'date-fns';
 import { and, desc, eq, gte, inArray, lte, sql } from 'drizzle-orm';
 import { Hono } from 'hono';
 import { z } from 'zod';
@@ -13,11 +13,13 @@ import {
   insertTransactionSchema,
   transactions,
 } from '@/database/schema';
+import { getDateRange } from '@/utils/get-date-range';
 
 const app = new Hono()
   // Get all transactions
   .get(
     '/',
+    clerkMiddleware(),
     zValidator(
       'query',
       z.object({
@@ -26,7 +28,6 @@ const app = new Hono()
         accountId: z.string().optional(),
       }),
     ),
-    clerkMiddleware(),
     async (c) => {
       const auth = getAuth(c);
       const { accountId, from, to } = c.req.valid('query');
@@ -35,15 +36,7 @@ const app = new Hono()
         return c.json({ error: 'Unauthorized.' }, 401);
       }
 
-      const today = new Date();
-
-      const defaultTo = addDays(today, 30);
-      const defaultFrom = subDays(today, 30);
-
-      const startDate = from
-        ? parse(from, 'yyyy-MM-dd', new Date())
-        : defaultFrom;
-      const endDate = to ? parse(to, 'yyyy-MM-dd', new Date()) : defaultTo;
+      const { startDate, endDate } = getDateRange(from, to);
 
       const data = await db
         .select({
@@ -106,10 +99,7 @@ const app = new Hono()
         .innerJoin(accounts, eq(transactions.accountId, accounts.id))
         .leftJoin(categories, eq(transactions.categoryId, categories.id))
         .where(
-          and(
-            eq(transactions.userId, auth.userId),
-            eq(transactions.id, id),
-          ),
+          and(eq(transactions.userId, auth.userId), eq(transactions.id, id)),
         );
 
       if (!data) {

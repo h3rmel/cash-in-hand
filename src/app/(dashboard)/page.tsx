@@ -1,15 +1,22 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import {
+  DataCharts,
+  DataGrid,
+  WelcomeMessage,
+} from '@/features/summary/components';
+import { useGetSummary } from '@/features/summary/services/use-get-summary';
 
-import { useSheets } from '@/hooks/use-sheets';
+import { cn } from '@/lib/utils';
 
-export default function Home() {
-  const { onOpen } = useSheets();
+export default function DashboardPage() {
+  const { data, isLoading } = useGetSummary();
 
   return (
-    <div>
-      <Button onClick={() => onOpen('newAccount')}>Add Account</Button>
-    </div>
+    <section className={cn('flex flex-col gap-4', 'min-h-[88dvh]', 'pb-8')}>
+      <WelcomeMessage />
+      <DataGrid isLoading={isLoading} data={data!} />
+      <DataCharts isLoading={isLoading} data={data!} />
+    </section>
   );
 }

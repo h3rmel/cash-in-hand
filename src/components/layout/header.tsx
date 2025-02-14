@@ -14,7 +14,8 @@ export function Header() {
         'sticky top-0 left-0',
         'h-20',
         'border border-b',
-        'backdrop-blur',
+        'bg-background/50',
+        'backdrop-blur-lg',
       )}
     >
       <nav

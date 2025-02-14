@@ -83,7 +83,7 @@ export default function TransactionsPage() {
     bulkCreateTransactions.mutate(data, {
       onSuccess: () => {
         onCancelImport();
-      }
+      },
     });
   }
 
@@ -91,7 +91,7 @@ export default function TransactionsPage() {
 
   if (transactionQuery.isLoading) {
     return (
-      <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
+      <section className={cn('flex flex-col gap-4', 'min-h-[88dvh]')}>
         <hgroup
           className={cn(
             'flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2',
@@ -136,7 +136,7 @@ export default function TransactionsPage() {
   }
 
   return (
-    <section className={cn('flex flex-col gap-4', 'min-h-[86.5dvh]')}>
+    <section className={cn('flex flex-col gap-4', 'min-h-[88dvh]')}>
       {renderSections()}
     </section>
   );
