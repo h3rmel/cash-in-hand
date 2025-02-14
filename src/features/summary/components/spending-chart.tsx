@@ -19,7 +19,7 @@ import { DonutChartVariant } from './charts/donut-chart-variant';
 import { RadialChartVariant } from './charts/radial-chart-variant';
 
 type SpendingChartProps = {
-  data: {
+  data?: {
     value: number;
     name: string;
   }[];
@@ -27,7 +27,7 @@ type SpendingChartProps = {
 
 type ChartType = 'donut' | 'radial';
 
-export function SpendingChart({ data }: SpendingChartProps) {
+export function SpendingChart({ data = [] }: SpendingChartProps) {
   const [selectedChart, setSelectedChart] = useState<ChartType>('donut');
 
   const chartConfig = data.reduce(
