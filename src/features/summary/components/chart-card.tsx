@@ -32,7 +32,7 @@ export function ChartCard({ data = [] }: ChartCardProps) {
 
   function renderChart() {
     if (data.length === 0) {
-      return <Skeleton className={cn('h-48 w-full')} />;
+      return <p>No data.</p>;
     }
 
     switch (selectedChart) {
@@ -55,7 +55,6 @@ export function ChartCard({ data = [] }: ChartCardProps) {
         <CardTitle className={cn('text-2xl line-clamp-1')}>
           Transactions
         </CardTitle>
-        {/* TODO: add select */}
         <Select
           value={selectedChart}
           onValueChange={(value) => setSelectedChart(value as ChartType)}

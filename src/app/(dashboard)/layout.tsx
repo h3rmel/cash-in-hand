@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import { Filters } from '@/components/filters';
 import { Header } from '@/components/layout/header';
 
 import { cn } from '@/lib/utils';
@@ -20,6 +21,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           'lg:border-x',
         )}
       >
+        <Filters />
         {children}
       </section>
     </main>

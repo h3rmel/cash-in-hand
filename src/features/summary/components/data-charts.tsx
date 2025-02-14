@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 type DataChartsProps = {
   isLoading: boolean;
-  data: {
+  data?: {
     incomeAmount: number;
     expensesAmount: number;
     remainingAmount: number;
@@ -44,10 +44,10 @@ export function DataCharts({ data, isLoading }: DataChartsProps) {
   return (
     <div className={cn('grid grid-cols-1 lg:grid-cols-6 gap-8')}>
       <div className={cn('col-span-1 lg:col-span-3 xl:col-span-4')}>
-        <ChartCard data={data.days} />
+        <ChartCard data={data?.days} />
       </div>
       <div className={cn('col-span-1 lg:col-span-3 xl:col-span-2')}>
-        <SpendingChart data={data.categories}/>
+        <SpendingChart data={data?.categories}/>
       </div>
     </div>
   );

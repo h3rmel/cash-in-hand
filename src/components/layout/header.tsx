@@ -13,7 +13,7 @@ export function Header() {
       className={cn(
         'sticky top-0 left-0',
         'h-20',
-        'border border-b',
+        'border-b',
         'bg-background/50',
         'backdrop-blur-lg',
       )}

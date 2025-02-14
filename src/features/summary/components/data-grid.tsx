@@ -10,7 +10,7 @@ import { DataCard } from './data-card';
 
 type DataGridProps = {
   isLoading: boolean;
-  data: {
+  data?: {
     incomeAmount: number;
     expensesAmount: number;
     remainingAmount: number;

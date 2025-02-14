@@ -22,7 +22,7 @@ export function useDeleteAccounts() {
       toast.success('Account(s) deleted successfully');
       void queryClient.invalidateQueries({ queryKey: ['accounts'] });
       void queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      // TODO: Invalidate "summary" query key when it's available
+      void queryClient.invalidateQueries({ queryKey: ['summary'] });
     },
     onError: () => {
       toast.error('Failed to create account(s)');

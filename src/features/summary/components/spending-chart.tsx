@@ -42,7 +42,7 @@ export function SpendingChart({ data }: SpendingChartProps) {
 
   function renderChart() {
     if (data.length === 0) {
-      return <Skeleton className={cn('h-48 w-full')} />;
+      return <p>No data.</p>;
     }
 
     switch (selectedChart) {
