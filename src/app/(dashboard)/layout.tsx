@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 
-import { Filters } from '@/components/filters';
+import { Filters, FiltersSkeleton } from '@/components/filters';
 import { Header } from '@/components/layout/header';
 
 import { cn } from '@/lib/utils';
@@ -21,8 +21,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           'lg:border-x',
         )}
       >
-        <Filters />
-        {children}
+        <Suspense fallback={<FiltersSkeleton />}>
+          <Filters />
+          {children}
+        </Suspense>
       </section>
     </main>
   );

@@ -1,3 +1,5 @@
+'use client';
+
 import { useSearchParams } from 'next/navigation';
 
 import { useQuery } from '@tanstack/react-query';
@@ -13,7 +15,6 @@ export function useGetSummary() {
   const accountId = params.get('accountId') || '';
 
   const query = useQuery({
-    // TODO: check if params are needed in the key
     queryKey: ['transactions', { from, to, accountId }],
     queryFn: async () => {
       const response = await client.api.summary.$get({
