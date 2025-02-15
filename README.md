@@ -2,7 +2,9 @@
 
 Finance tracker PWA web application.
 
-Built with Next.js, Shadcn, Clerk, Drizzle and Neon. Will be deployed soon.
+Built with Next.js, Shadcn, Clerk, Drizzle and Neon. Deploy on Vercel.
+
+You can try the app [here](https://cash-in-hand.vercel.app/).
 
 ## Setting up the project
 
